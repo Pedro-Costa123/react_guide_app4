@@ -6,7 +6,9 @@ const EventsRoot = () => {
   return (
     <>
       <EventsNavigation />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </>
   );
 };
