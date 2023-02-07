@@ -83,7 +83,7 @@ function EventForm({ method, event }) {
 
 export default EventForm;
 
-export const action = async ({ request, params }) => {
+export async function action({ request, params }) {
   const method = request.method;
   const data = await request.formData();
 
@@ -95,13 +95,17 @@ export const action = async ({ request, params }) => {
   };
 
   let url = "http://localhost:8080/events";
+
   if (method === "PATCH") {
-    url = "http://localhost:8080/events/" + params.eventId;
+    const eventId = params.eventId;
+    url = "http://localhost:8080/events/" + eventId;
   }
 
   const response = await fetch(url, {
     method: method,
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(eventData),
   });
 
@@ -110,8 +114,8 @@ export const action = async ({ request, params }) => {
   }
 
   if (!response.ok) {
-    throw json({ message: "Could not send event." }, { status: 500 });
+    throw json({ message: "Could not save event." }, { status: 500 });
   }
 
   return redirect("/events");
-};
+}

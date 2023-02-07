@@ -1,15 +1,15 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import EditEventPage from "./pages/EditEventPage";
+import EditEventPage from "./pages/EditEvent";
 import ErrorPage from "./pages/Error";
 import EventDetailPage, {
   loader as eventDetailLoader,
   action as deleteEventAction,
-} from "./pages/EventDetailPage";
-import EventsPage, { loader as eventsLoader } from "./pages/EventsPage";
-import EventsRoot from "./pages/EventsRoot";
-import HomePage from "./pages/HomePage";
-import NewEventPage from "./pages/NewEventPage";
+} from "./pages/EventDetail";
+import EventsPage, { loader as eventsLoader } from "./pages/Events";
+import EventsRootLayout from "./pages/EventsRoot";
+import HomePage from "./pages/Home";
+import NewEventPage from "./pages/NewEvent";
 import RootLayout from "./pages/Root";
 import { action as manipulateEventAction } from "./components/EventForm";
 import NewsletterPage, { action as newsletterAction } from "./pages/Newsletter";
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       {
         path: "events",
-        element: <EventsRoot />,
+        element: <EventsRootLayout />,
         children: [
           {
             index: true,
@@ -63,8 +63,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-const App = () => {
+function App() {
   return <RouterProvider router={router} />;
-};
+}
 
 export default App;
